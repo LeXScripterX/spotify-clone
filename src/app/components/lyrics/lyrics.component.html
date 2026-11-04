@@ -1,0 +1,27 @@
+<div class="lyrics-viewport">
+  <div class="lyrics-scroll" #lyricsScroll>
+    @if (lyricsService.isLoading()) {
+      <div class="lyrics-loading">
+        <p>Cargando letras...</p>
+      </div>
+    } @else if (lyricsService.lyrics()) {
+      <div class="lyrics-lines">
+        @for (line of lyricsService.lyrics()!.line; track $index) {
+          <p
+            class="lyric-line"
+            [class.active]="$index === lyricsService.activeLineIndex()"
+            [class.past]="$index < lyricsService.activeLineIndex()"
+            [attr.data-index]="$index"
+            (click)="onLineTap($index, line)"
+          >
+            {{ line.value || '♪' }}
+          </p>
+        }
+      </div>
+    } @else {
+      <div class="no-lyrics">
+        <p>No hay letras disponibles para esta canción</p>
+      </div>
+    }
+  </div>
+</div>

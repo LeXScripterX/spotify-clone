@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="page-title">Tu Biblioteca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="library-content">
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  } @else {
+    <div class="library-container">
+      <ion-list class="albums-list" lines="none">
+        @for (album of albums(); track album.id) {
+          <ion-item button (click)="openAlbum(album.id)" class="album-item" detail="false">
+            <ion-thumbnail slot="start" class="album-thumbnail">
+              <img
+                [src]="getCoverUrl(album.coverArt || album.id)"
+                [alt]="album.name"
+                loading="lazy"
+              />
+            </ion-thumbnail>
+            <ion-label>
+              <h3 class="album-name">{{ album.name }}</h3>
+              <p class="album-details">Álbum • {{ album.artist }}</p>
+            </ion-label>
+          </ion-item>
+        } @empty {
+          <div class="empty-state">
+            <p>No se encontraron álbumes en tu biblioteca</p>
+          </div>
+        }
+      </ion-list>
+    </div>
+  }
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <div class="logo-section">
+      <div class="icon-circle">
+        <ion-icon name="musical-notes"></ion-icon>
+      </div>
+      <h1 class="title">Spotify Clone</h1>
+      <p class="subtitle">Conecta con tu servidor Navidrome</p>
+    </div>
+
+    <form class="form-section" (ngSubmit)="login()">
+      <ion-list lines="none" class="input-list">
+        <ion-item class="input-item">
+          <ion-input
+            type="text"
+            label="Usuario"
+            labelPlacement="floating"
+            placeholder="Introduce tu usuario"
+            [(ngModel)]="username"
+            name="username"
+            [clearInput]="true"
+            autocomplete="username"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-input
+            type="password"
+            label="Contraseña"
+            labelPlacement="floating"
+            placeholder="Introduce tu contraseña"
+            [(ngModel)]="password"
+            name="password"
+            [clearInput]="true"
+            autocomplete="current-password"
+            required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="login-button"
+        [disabled]="!username || !password">
+        Iniciar Sesión
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

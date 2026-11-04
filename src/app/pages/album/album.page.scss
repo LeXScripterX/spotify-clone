@@ -1,0 +1,159 @@
+:host {
+  display: block;
+}
+
+.album-content {
+  --background: #121212;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --color: #ffffff;
+}
+
+ion-back-button {
+  --color: #ffffff;
+}
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.album-details-container {
+  padding: 0 16px 80px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 24px 0;
+
+  .album-cover {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  }
+}
+
+.info-section {
+  margin-bottom: 20px;
+
+  .album-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.4px;
+  }
+
+  .artist-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #b3b3b3;
+    margin: 0 0 6px 0;
+  }
+
+  .meta-info {
+    font-size: 13px;
+    color: #888888;
+    margin: 0;
+  }
+}
+
+.actions-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .play-fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--spotify-green, #1db954);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: transform 0.15s ease, background-color 0.2s ease;
+
+    &:hover {
+      background-color: #1ed760;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    .play-icon {
+      font-size: 26px;
+      color: #000000;
+      margin-inline-start: 3px;
+    }
+  }
+}
+
+.songs-list {
+  background: transparent;
+  padding: 0;
+
+  .song-item {
+    --background: transparent;
+    --background-hover: #1e1e1e;
+    --background-activated: #282828;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --inner-padding-end: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    .track-number {
+      font-size: 14px;
+      color: #b3b3b3;
+      width: 28px;
+      text-align: center;
+      margin-inline-end: 12px;
+      flex-shrink: 0;
+    }
+
+    .song-label {
+      margin: 12px 0;
+
+      .song-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .song-artist {
+        font-size: 13px;
+        color: #b3b3b3;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .song-duration {
+      font-size: 13px;
+      color: #b3b3b3;
+      margin-inline-start: 12px;
+      flex-shrink: 0;
+    }
+  }
+}

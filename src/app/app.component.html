@@ -1,0 +1,6 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  @if (playerService.currentSong()) {
+    <app-mini-player></app-mini-player>
+  }
+</ion-app>

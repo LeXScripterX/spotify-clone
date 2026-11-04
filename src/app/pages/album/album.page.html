@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home" text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="album-content">
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  } @else if (album(); as currentAlbum) {
+    <div class="album-details-container">
+      <div class="cover-wrapper">
+        <img
+          [src]="getCoverUrl(currentAlbum.coverArt || currentAlbum.id)"
+          [alt]="currentAlbum.name"
+          class="album-cover"
+        />
+      </div>
+
+      <div class="info-section">
+        <h1 class="album-name">{{ currentAlbum.name }}</h1>
+        <p class="artist-name">{{ currentAlbum.artist }}</p>
+        <p class="meta-info">
+          @if (currentAlbum.year) {
+            <span>{{ currentAlbum.year }} • </span>
+          }
+          <span>{{ currentAlbum.song?.length || currentAlbum.songCount || 0 }} canciones</span>
+        </p>
+      </div>
+
+      <div class="actions-section">
+        <button class="play-fab" (click)="playAlbum()" aria-label="Reproducir álbum">
+          <ion-icon name="play" class="play-icon"></ion-icon>
+        </button>
+      </div>
+
+      <ion-list class="songs-list" lines="none">
+        @for (song of currentAlbum.song; track song.id; let idx = $index) {
+          <ion-item button (click)="playSong(song)" class="song-item" detail="false">
+            <span class="track-number">{{ song.track || idx + 1 }}</span>
+            <ion-label class="song-label">
+              <h3 class="song-title">{{ song.title }}</h3>
+              <p class="song-artist">{{ song.artist }}</p>
+            </ion-label>
+            <span slot="end" class="song-duration">
+              {{ formatDuration(song.duration) }}
+            </span>
+          </ion-item>
+        }
+      </ion-list>
+    </div>
+  }
+</ion-content>

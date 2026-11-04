@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.mini-player {
+  background: #282828;
+  margin: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.mini-player-content {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+}
+
+.mini-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.mini-info {
+  flex: 1;
+  min-width: 0;
+
+  .mini-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mini-artist {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.mini-play-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mini-progress {
+  height: 2px;
+  background: #535353;
+
+  .mini-progress-fill {
+    height: 100%;
+    background: white;
+    transition: width 0.3s linear;
+  }
+}

@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="greeting-title">{{ greeting() }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-content">
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  } @else {
+    <div class="content-wrapper">
+      @if (recentSongs().length > 0) {
+        <section class="section">
+          <h2 class="section-title">Escuchado recientemente</h2>
+          <div class="horizontal-scroll">
+            @for (song of recentSongs(); track song.id) {
+              <div class="song-card" (click)="playSong(song, recentSongs())">
+                <div class="song-cover-wrapper">
+                  <img
+                    [src]="getCoverUrl(song.coverArt || song.id)"
+                    [alt]="song.title"
+                    loading="lazy"
+                    class="song-cover"
+                  />
+                </div>
+                <p class="song-title">{{ song.title }}</p>
+                <p class="song-artist">{{ song.artist }}</p>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (albums().length > 0) {
+        <section class="section">
+          <h2 class="section-title">Álbumes recientes</h2>
+          <ion-grid class="albums-grid">
+            <ion-row>
+              @for (album of albums(); track album.id) {
+                <ion-col size="6" size-md="4" size-lg="3">
+                  <div class="album-card" (click)="openAlbum(album.id)">
+                    <div class="album-cover-wrapper">
+                      <img
+                        [src]="getCoverUrl(album.coverArt || album.id)"
+                        [alt]="album.name"
+                        loading="lazy"
+                        class="album-cover"
+                      />
+                    </div>
+                    <p class="album-name">{{ album.name }}</p>
+                    <p class="album-artist">{{ album.artist }}</p>
+                  </div>
+                </ion-col>
+              }
+            </ion-row>
+          </ion-grid>
+        </section>
+      }
+    </div>
+  }
+</ion-content>

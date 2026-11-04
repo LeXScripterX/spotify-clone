@@ -1,0 +1,85 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="page-title">Buscar</ion-title>
+  </ion-toolbar>
+  <div class="searchbar-container">
+    <ion-searchbar
+      [debounce]="400"
+      (ionInput)="onSearch($event)"
+      placeholder="Buscar canciones, álbumes..."
+      class="spotify-searchbar"
+    ></ion-searchbar>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="search-content">
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  } @else if (!query()) {
+    <div class="empty-state">
+      <ion-icon name="search-outline" class="empty-icon"></ion-icon>
+      <h2>Busca tu música favorita</h2>
+      <p>Encuentra canciones, artistas y álbumes en tu biblioteca</p>
+    </div>
+  } @else {
+    <div class="results-container">
+      @if (searchResults().songs.length > 0) {
+        <section class="results-section">
+          <h3 class="section-title">Canciones</h3>
+          <ion-list class="songs-list" lines="none">
+            @for (song of searchResults().songs; track song.id) {
+              <ion-item button (click)="playSong(song)" class="song-item" detail="false">
+                <ion-thumbnail slot="start" class="song-thumbnail">
+                  <img
+                    [src]="getCoverUrl(song.coverArt || song.id)"
+                    [alt]="song.title"
+                    loading="lazy"
+                  />
+                </ion-thumbnail>
+                <ion-label>
+                  <h4 class="song-title">{{ song.title }}</h4>
+                  <p class="song-artist">{{ song.artist }}</p>
+                </ion-label>
+              </ion-item>
+            }
+          </ion-list>
+        </section>
+      }
+
+      @if (searchResults().albums.length > 0) {
+        <section class="results-section">
+          <h3 class="section-title">Álbumes</h3>
+          <div class="horizontal-scroll">
+            @for (album of searchResults().albums; track album.id) {
+              <div class="album-card" (click)="openAlbum(album.id)">
+                <div class="album-cover-wrapper">
+                  <img
+                    [src]="getCoverUrl(album.coverArt || album.id)"
+                    [alt]="album.name"
+                    loading="lazy"
+                    class="album-cover"
+                  />
+                </div>
+                <p class="album-name">{{ album.name }}</p>
+                <p class="album-artist">{{ album.artist }}</p>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (
+        searchResults().songs.length === 0 &&
+        searchResults().albums.length === 0 &&
+        searchResults().artists.length === 0
+      ) {
+        <div class="no-results">
+          <h3>No se encontraron resultados</h3>
+          <p>Asegúrate de haber escrito correctamente la palabra clave</p>
+        </div>
+      }
+    </div>
+  }
+</ion-content>

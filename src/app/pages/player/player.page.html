@@ -1,0 +1,83 @@
+<ion-content [fullscreen]="true" class="player-content">
+  <div class="player-page-layout">
+    <header class="player-header">
+      <button class="down-btn-wrap" (click)="goBack()" aria-label="Volver">
+        <ion-icon name="chevron-down" class="down-btn"></ion-icon>
+      </button>
+      <span class="header-title">{{ playerService.currentSong()?.album || 'REPRODUCIENDO' }}</span>
+      <div class="header-spacer"></div>
+    </header>
+
+    @if (!showLyrics()) {
+      <div class="artwork-container" [class.playing]="playerService.isPlaying()">
+        <img
+          [src]="getCoverUrl()"
+          [alt]="playerService.currentSong()?.title || 'Cover'"
+        />
+      </div>
+    } @else {
+      <div class="lyrics-container">
+        <app-lyrics></app-lyrics>
+      </div>
+    }
+
+    <div class="song-info">
+      <h2 class="song-title">{{ playerService.currentSong()?.title || 'Sin reproducción' }}</h2>
+      <p class="song-artist">{{ playerService.currentSong()?.artist || '—' }}</p>
+    </div>
+
+    <div class="progress-section">
+      <div
+        class="progress-bar"
+        (click)="onProgressClick($event)"
+        role="slider"
+        [attr.aria-valuenow]="playerService.progress() * 100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="progress-fill" [style.width.%]="playerService.progress() * 100"></div>
+      </div>
+      <div class="time-labels">
+        <span>{{ formatTime(playerService.currentTime()) }}</span>
+        <span>{{ formatTime(playerService.duration()) }}</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <ion-button
+        fill="clear"
+        class="control-btn"
+        (click)="playerService.previous()"
+        aria-label="Anterior"
+      >
+        <ion-icon name="play-skip-back"></ion-icon>
+      </ion-button>
+      <div class="play-btn-wrap" (click)="playerService.togglePlayPause()">
+        <ion-icon
+          [name]="playerService.isPlaying() ? 'pause-circle' : 'play-circle'"
+          class="play-btn"
+        ></ion-icon>
+      </div>
+      <ion-button
+        fill="clear"
+        class="control-btn"
+        (click)="playerService.next()"
+        aria-label="Siguiente"
+      >
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </ion-button>
+    </div>
+
+    <footer class="bottom-actions">
+      <ion-button
+        fill="clear"
+        class="lyrics-btn"
+        [class.active]="showLyrics()"
+        (click)="toggleLyrics()"
+      >
+        <ion-icon name="text" slot="start"></ion-icon>
+        Letras
+      </ion-button>
+    </footer>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+<div class="mini-player" (click)="openPlayer()">
+  <div class="mini-player-content">
+    <img [src]="getCoverUrl()" class="mini-cover" alt="cover" />
+    <div class="mini-info">
+      <p class="mini-title">{{ playerService.currentSong()?.title }}</p>
+      <p class="mini-artist">{{ playerService.currentSong()?.artist }}</p>
+    </div>
+    <button class="mini-play-btn" (click)="$event.stopPropagation(); playerService.togglePlayPause()">
+      <ion-icon [name]="playerService.isPlaying() ? 'pause' : 'play'"></ion-icon>
+    </button>
+  </div>
+  <div class="mini-progress">
+    <div class="mini-progress-fill" [style.width.%]="playerService.progress() * 100"></div>
+  </div>
+</div>
