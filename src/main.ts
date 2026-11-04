@@ -1,14 +1,13 @@
+import { provideHttpClient } from '@angular/common/http';
 import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
+  PreloadAllModules,
   RouteReuseStrategy,
   provideRouter,
   withComponentInputBinding,
   withPreloading,
-  PreloadAllModules,
 } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 
 import { AppComponent } from './app/app.component';
@@ -25,6 +24,5 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular({ mode: 'md' }),
     provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding()),
     provideHttpClient(),
-    provideAnimationsAsync(),
   ],
 });

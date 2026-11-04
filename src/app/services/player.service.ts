@@ -8,6 +8,9 @@ import { Song } from '../models/subsonic.models';
 export class PlayerService {
   private readonly navidromeService = inject(NavidromeService);
   private readonly audio = new Audio();
+  volume = signal<number>(1); // 0 a 1
+private lastVolume = 1;
+  
 
   currentSong = signal<Song | null>(null);
   isPlaying = signal<boolean>(false);
@@ -97,4 +100,15 @@ export class PlayerService {
   seekToPercent(percent: number): void {
     this.audio.currentTime = percent * this.duration();
   }
+
+  setVolume(value: number): void {
+  const v = Math.min(1, Math.max(0, value));
+  this.audio.volume = v;
+  this.volume.set(v);
+  if (v > 0) this.lastVolume = v;
+}
+
+toggleMute(): void {
+  this.setVolume(this.volume() > 0 ? 0 : this.lastVolume || 1);
+}
 }

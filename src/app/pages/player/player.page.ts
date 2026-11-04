@@ -1,40 +1,37 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonButton,
-  IonIcon,
-} from '@ionic/angular';
+import { IonButton, IonContent, IonIcon, IonRange } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   chevronDown,
-  playSkipBack,
-  playCircle,
-  pauseCircle,
-  playSkipForward,
   musicalNote,
+  pauseCircle,
+  playCircle,
+  playSkipBack,
+  playSkipForward,
   text,
+  volumeHigh,
+  volumeLow,
+  volumeMedium,
+  volumeMute,
 } from 'ionicons/icons';
+
 import { LyricsComponent } from '../../components/lyrics/lyrics.component';
-import { PlayerService } from '../../services/player.service';
 import { LyricsService } from '../../services/lyrics.service';
 import { NavidromeService } from '../../services/navidrome.service';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.page.html',
   styleUrls: ['./player.page.scss'],
+  standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonButtons,
     IonButton,
+    IonContent,
     IonIcon,
     LyricsComponent,
+    IonRange
   ],
 })
 export class PlayerPage {
@@ -54,6 +51,10 @@ export class PlayerPage {
       playSkipForward,
       musicalNote,
       text,
+       volumeHigh,
+  volumeLow,
+  volumeMedium,
+  volumeMute,
     });
 
     effect(() => {
@@ -80,7 +81,7 @@ export class PlayerPage {
   }
 
   toggleLyrics(): void {
-    this.showLyrics.update((v) => !v);
+    this.showLyrics.update((v: boolean) => !v);
   }
 
   onProgressClick(event: MouseEvent): void {
@@ -108,4 +109,16 @@ export class PlayerPage {
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
+  volumeIcon(): string {
+  const v = this.playerService.volume();
+  if (v === 0) return 'volume-mute';
+  if (v < 0.34) return 'volume-low';
+  if (v < 0.67) return 'volume-medium';
+  return 'volume-high';
+}
+
+onVolume(event: Event): void {
+  const value = Number((event as CustomEvent).detail.value);
+  this.playerService.setVolume(value / 100);
+}
 }

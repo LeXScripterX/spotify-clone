@@ -1,10 +1,12 @@
+import type {
+  ElementRef} from '@angular/core';
 import {
   Component,
-  ElementRef,
   effect,
   inject,
   viewChild,
 } from '@angular/core';
+
 import { LyricsService } from '../../services/lyrics.service';
 import { PlayerService } from '../../services/player.service';
 import { LyricLine } from '../../models/subsonic.models';

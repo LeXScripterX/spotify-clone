@@ -43,6 +43,7 @@
       </div>
     </div>
 
+    <!-- Controles de reproducción -->
     <div class="controls">
       <ion-button
         fill="clear"
@@ -52,12 +53,14 @@
       >
         <ion-icon name="play-skip-back"></ion-icon>
       </ion-button>
+
       <div class="play-btn-wrap" (click)="playerService.togglePlayPause()">
         <ion-icon
           [name]="playerService.isPlaying() ? 'pause-circle' : 'play-circle'"
           class="play-btn"
         ></ion-icon>
       </div>
+
       <ion-button
         fill="clear"
         class="control-btn"
@@ -68,6 +71,26 @@
       </ion-button>
     </div>
 
+    <!-- Sección de Volumen (fuera de controls) -->
+   <div class="volume-section">
+  <ion-range
+    min="0"
+    max="100"
+    [value]="playerService.volume() * 100"
+    (ionInput)="onVolume($event)"
+    aria-label="Volumen"
+  >
+    <ion-icon
+      [name]="volumeIcon()"
+      slot="start"
+      class="volume-icon"
+      (click)="playerService.toggleMute()"
+      aria-label="Silenciar"
+    ></ion-icon>
+  </ion-range>
+</div>
+
+    <!-- Footer -->
     <footer class="bottom-actions">
       <ion-button
         fill="clear"

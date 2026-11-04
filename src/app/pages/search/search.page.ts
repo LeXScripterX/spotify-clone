@@ -15,9 +15,10 @@ import {
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { musicalNote, disc, searchOutline } from 'ionicons/icons';
+
+import type { Album, Artist, Song } from '../../models/subsonic.models';
 import { NavidromeService } from '../../services/navidrome.service';
 import { PlayerService } from '../../services/player.service';
-import { Album, Artist, Song } from '../../models/subsonic.models';
 
 @Component({
   selector: 'app-search',

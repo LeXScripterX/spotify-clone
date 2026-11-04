@@ -1,0 +1,45 @@
+<div class="user-menu-container">
+  <ul class="menu-list">
+    <li class="menu-item" (click)="onOption('cuenta')">
+      <span>Cuenta</span>
+      <ion-icon name="open-outline" class="external-icon"></ion-icon>
+    </li>
+    <li class="menu-item" (click)="onOption('perfil')">
+      <span>Perfil</span>
+    </li>
+    <li class="menu-item" (click)="onOption('recientes')">
+      <span>Recientes</span>
+    </li>
+    <li class="menu-item" (click)="onOption('premium')">
+      <span>Cámbiate a Premium</span>
+      <ion-icon name="open-outline" class="external-icon"></ion-icon>
+    </li>
+    <li class="menu-item" (click)="onOption('ayuda')">
+      <span>Ayuda</span>
+      <ion-icon name="open-outline" class="external-icon"></ion-icon>
+    </li>
+    <li class="menu-item" (click)="onOption('descargar')">
+      <span>Descargar</span>
+      <ion-icon name="open-outline" class="external-icon"></ion-icon>
+    </li>
+    <li class="menu-item" (click)="onOption('preferencias')">
+      <span>Preferencias</span>
+    </li>
+    <li class="menu-item logout" (click)="logout()">
+      <span>Cerrar sesión</span>
+    </li>
+  </ul>
+
+  <div class="menu-divider"></div>
+
+  <div class="notifications-section">
+    <h4 class="section-title">Tus avisos</h4>
+    <div class="empty-state">
+      <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
+      <p class="empty-title">Ya estás al día</p>
+      <p class="empty-desc">
+        Consulta este espacio para conocer las novedades sobre tus seguidores, playlists, eventos y más.
+      </p>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@ import { PlayerService } from '../../services/player.service';
   selector: 'app-album',
   templateUrl: './album.page.html',
   styleUrls: ['./album.page.scss'],
-  imports: [IonTitle, 
+  imports: [IonTitle,
     IonContent,
     IonHeader,
     IonToolbar,
@@ -32,9 +32,7 @@ import { PlayerService } from '../../services/player.service';
     IonItem,
     IonLabel,
     IonIcon,
-    IonButton,
-    IonSpinner,
-  ],
+    IonSpinner],
 })
 export class AlbumPage {
   id = input.required<string>();

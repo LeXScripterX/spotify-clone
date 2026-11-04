@@ -1,18 +1,83 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Inicio</ion-label>
-    </ion-tab-button>
+<div class="app-layout">
+  <!-- Sidebar escritorio colapsable -->
+  <aside class="desktop-sidebar" [class.collapsed]="isCollapsed()">
+    <div class="sidebar-header">
+      <button class="toggle-btn" (click)="toggleSidebar()" [attr.aria-label]="isCollapsed() ? 'Expandir menú' : 'Colapsar menú'">
+        <ion-icon [name]="isCollapsed() ? 'chevron-forward' : 'chevron-back'"></ion-icon>
+      </button>
+      @if (!isCollapsed()) {
+        <h2 class="brand-title">Spotify</h2>
+      }
+    </div>
 
-    <ion-tab-button tab="search">
-      <ion-icon name="search"></ion-icon>
-      <ion-label>Buscar</ion-label>
-    </ion-tab-button>
+    <nav class="sidebar-nav">
+      <a routerLink="/tabs/home" routerLinkActive="active" class="nav-item" [attr.title]="isCollapsed() ? 'Inicio' : null">
+        <ion-icon name="home"></ion-icon>
+        <span class="nav-text">Inicio</span>
+      </a>
 
-    <ion-tab-button tab="library">
-      <ion-icon name="library"></ion-icon>
-      <ion-label>Biblioteca</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+      <a routerLink="/tabs/search" routerLinkActive="active" class="nav-item" [attr.title]="isCollapsed() ? 'Buscar' : null">
+        <ion-icon name="search"></ion-icon>
+        <span class="nav-text">Buscar</span>
+      </a>
+
+      <a routerLink="/tabs/library" routerLinkActive="active" class="nav-item" [attr.title]="isCollapsed() ? 'Biblioteca' : null">
+        <ion-icon name="library"></ion-icon>
+        <span class="nav-text">Biblioteca</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Contenedor Principal -->
+  <main class="main-content">
+    <header class="top-bar">
+      <div class="top-bar-right">
+        <button class="top-btn" aria-label="Instalar aplicación">
+          <ion-icon name="download-outline"></ion-icon>
+          <span>Instalar aplicación</span>
+        </button>
+
+        <button class="top-btn-icon" aria-label="Notificaciones">
+          <ion-icon name="notifications-outline"></ion-icon>
+        </button>
+
+        <button id="user-avatar-trigger" class="avatar-btn" aria-label="Menú de usuario">
+          <span>A</span>
+        </button>
+
+        <ion-popover
+          trigger="user-avatar-trigger"
+          triggerAction="click"
+          alignment="end"
+          side="bottom"
+          [dismissOnSelect]="true"
+        >
+          <ng-template>
+            <app-user-menu></app-user-menu>
+          </ng-template>
+        </ion-popover>
+      </div>
+    </header>
+
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" class="mobile-tab-bar">
+        <ion-tab-button tab="home">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="search">
+          <ion-icon name="search"></ion-icon>
+          <ion-label>Buscar</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="library">
+          <ion-icon name="library"></ion-icon>
+          <ion-label>Biblioteca</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+
+    <app-mini-player></app-mini-player>
+  </main>
+</div>

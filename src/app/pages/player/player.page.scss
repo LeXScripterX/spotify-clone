@@ -192,6 +192,47 @@
   }
 }
 
+/* Sección de Volumen Independiente y Alineada */
+.volume-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 200px;
+  margin: 0 auto 16px;
+
+  .volume-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #b3b3b3;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  ion-range {
+    flex: 1;
+    min-height: unset; /* Elimina la altura mínima interna de Ionic */
+    height: 24px;
+    margin: 0;
+    padding: 0;
+
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+
+    --bar-background: #535353;
+    --bar-background-active: #ffffff;
+    --bar-height: 4px;
+
+    --knob-background: #ffffff;
+    --knob-size: 12px;
+    --knob-box-shadow: none;
+  }
+}
+
 .bottom-actions {
   display: flex;
   justify-content: center;

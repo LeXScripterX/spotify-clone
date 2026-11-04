@@ -38,6 +38,7 @@ export const routes: Routes = [
   {
     path: 'player',
     loadComponent: () => import('./pages/player/player.page').then((m) => m.PlayerPage),
+    
     canActivate: [authGuard],
   },
   {

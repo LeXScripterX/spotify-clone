@@ -1,15 +1,71 @@
-<div class="mini-player" (click)="openPlayer()">
-  <div class="mini-player-content">
-    <img [src]="getCoverUrl()" class="mini-cover" alt="cover" />
-    <div class="mini-info">
-      <p class="mini-title">{{ playerService.currentSong()?.title }}</p>
-      <p class="mini-artist">{{ playerService.currentSong()?.artist }}</p>
+<div class="mini-player-bar">
+  <!-- Izquierda: Portada, título, artista y agregar -->
+  <div class="player-left">
+    <img [src]="getCoverUrl()" class="mini-cover" alt="cover" (click)="openPlayer()" />
+    <div class="mini-info" (click)="openPlayer()">
+      <span class="mini-title">{{ playerService.currentSong()?.title || 'Sin reproducción' }}</span>
+      <span class="mini-artist">{{ playerService.currentSong()?.artist || '—' }}</span>
     </div>
-    <button class="mini-play-btn" (click)="$event.stopPropagation(); playerService.togglePlayPause()">
-      <ion-icon [name]="playerService.isPlaying() ? 'pause' : 'play'"></ion-icon>
+    <button class="action-btn" aria-label="Añadir a biblioteca">
+      <ion-icon name="add-circle-outline"></ion-icon>
     </button>
   </div>
-  <div class="mini-progress">
-    <div class="mini-progress-fill" [style.width.%]="playerService.progress() * 100"></div>
+
+  <!-- Centro: Controles principales y Barra de tiempo -->
+  <div class="player-center">
+    <div class="controls-row">
+      <button class="control-btn" aria-label="Aleatorio">
+        <ion-icon name="shuffle"></ion-icon>
+      </button>
+
+      <button class="control-btn" (click)="playerService.previous()" aria-label="Anterior">
+        <ion-icon name="play-skip-back"></ion-icon>
+      </button>
+
+      <button class="play-btn-circle" (click)="playerService.togglePlayPause()" aria-label="Reproducir/Pausar">
+        <ion-icon [name]="playerService.isPlaying() ? 'pause' : 'play'"></ion-icon>
+      </button>
+
+      <button class="control-btn" (click)="playerService.next()" aria-label="Siguiente">
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </button>
+
+      <button class="control-btn" aria-label="Repetir">
+        <ion-icon name="repeat"></ion-icon>
+      </button>
+    </div>
+
+    <div class="playback-bar">
+      <span class="time-label">{{ formatTime(playerService.currentTime()) }}</span>
+      <div class="progress-bar-track" (click)="onProgressClick($event)">
+        <div class="progress-bar-fill" [style.width.%]="playerService.progress() * 100"></div>
+      </div>
+      <span class="time-label">{{ formatTime(playerService.duration()) }}</span>
+    </div>
+  </div>
+
+  <!-- Derecha: Utilidades y Volumen -->
+  <div class="player-right">
+    <button class="action-btn" aria-label="Letras">
+      <ion-icon name="mic-outline"></ion-icon>
+    </button>
+
+    <button class="action-btn" aria-label="Cola de reproducción">
+      <ion-icon name="list-outline"></ion-icon>
+    </button>
+
+    <div class="volume-container">
+      <ion-icon
+        [name]="volumeIcon()"
+        class="volume-icon"
+        (click)="playerService.toggleMute()"
+      ></ion-icon>
+      <ion-range
+        min="0"
+        max="100"
+        [value]="playerService.volume() * 100"
+        (ionInput)="onVolume($event)"
+      ></ion-range>
+    </div>
   </div>
 </div>
