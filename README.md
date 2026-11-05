@@ -155,5 +155,17 @@ src/app/
 │   └── player.service.ts    # Estado global de audio, colas y progreso
 └── tabs/                # Layout contenedor (Sidebar Desktop / Tab Bar Móvil)
 ```
+## Capturas de Pantalla
 
-<img src="/src/assets/source/2026-11-04-212108_hyprshot.png" alt="Layout Escritorio" width="600">
+### Escritorio
+<img src="src/assets/source/2026-11-04-213410_hyprshot.png" alt="Layout Escritorio" width="800">
+
+### Aplicación Móvil
+| Inicio de Sesión | Búsqueda |
+| :---: | :---: |
+| <img src="src/assets/source/2026-11-04-212108_hyprshot.png" width="240" alt="Login"> | <img src="src/assets/source/2026-11-04-212609_hyprshot.png" width="240" alt="Búsqueda"> |
+
+| Reproductor | Letras Sincronizadas |
+| :---: | :---: |
+| <img src="src/assets/source/2026-11-04-212243_hyprshot.png" width="240" alt="Reproductor"> | <img src="src/assets/source/2026-11-04-213150_hyprshot.png" width="240" alt="Letras"> |
+
