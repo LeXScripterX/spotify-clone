@@ -155,3 +155,5 @@ src/app/
 │   └── player.service.ts    # Estado global de audio, colas y progreso
 └── tabs/                # Layout contenedor (Sidebar Desktop / Tab Bar Móvil)
 ```
+
+<img src="/src/assets/source/2026-11-04-212108_hyprshot.png" alt="Layout Escritorio" width="600">
